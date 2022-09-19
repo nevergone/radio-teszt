@@ -1,15 +1,22 @@
-input.onButtonPressed(Button.A, function () {
-    radio.sendString("A")
+bluetooth.onUartDataReceived(serial.delimiters(Delimiters.NewLine), function () {
+	
 })
-input.onButtonPressed(Button.AB, function () {
-    radio.sendString("AB")
-})
-radio.onReceivedString(function (receivedString) {
-    basic.showString("-" + receivedString + "-")
+bluetooth.onBluetoothConnected(function () {
+    basic.showString("BT BE")
     basic.clearScreen()
 })
+bluetooth.onBluetoothDisconnected(function () {
+    basic.showString("BT KI")
+    basic.clearScreen()
+})
+input.onButtonPressed(Button.A, function () {
+	
+})
+input.onButtonPressed(Button.AB, function () {
+	
+})
 input.onButtonPressed(Button.B, function () {
-    radio.sendString("B")
+	
 })
 basic.clearScreen()
-radio.setGroup(1)
+bluetooth.startUartService()

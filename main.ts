@@ -1,6 +1,3 @@
-bluetooth.onUartDataReceived(serial.delimiters(Delimiters.NewLine), function () {
-    basic.showString("LN-" + bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine)) + "-")
-})
 bluetooth.onBluetoothConnected(function () {
     basic.showString("BT BE")
 })
@@ -19,5 +16,12 @@ input.onButtonPressed(Button.B, function () {
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     bluetooth.uartWriteValue("abc", 234)
 })
+let adat = ""
 basic.clearScreen()
 bluetooth.startUartService()
+basic.forever(function () {
+    adat = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
+    if (adat.isEmpty() == false) {
+        basic.showString("NL-" + adat + "-")
+    }
+})

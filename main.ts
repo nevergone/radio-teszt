@@ -13,8 +13,14 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     bluetooth.uartWriteNumber(9876)
 })
+control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EVT_ANY, function () {
+    basic.showString("CT-" + control.eventValue() + "-")
+})
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     bluetooth.uartWriteValue("abc", 234)
+})
+control.onEvent(EventBusSource.MICROBIT_ID_RADIO, EventBusValue.MICROBIT_EVT_ANY, function () {
+    basic.showString("RD-" + control.eventValue() + "-")
 })
 let adat = ""
 basic.clearScreen()

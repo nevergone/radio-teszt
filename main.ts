@@ -6,18 +6,6 @@ bluetooth.onBluetoothDisconnected(function () {
     basic.showString("BT KI")
     serial.writeLine("BT KI")
 })
-input.onButtonPressed(Button.A, function () {
-    bluetooth.uartWriteLine("BT SOR KULD")
-    serial.writeLine("BT SOR KULD")
-})
-input.onButtonPressed(Button.AB, function () {
-    bluetooth.uartWriteString("BT SZOVEG KULD")
-    serial.writeString("BT SZOVEG KULD")
-})
-input.onButtonPressed(Button.B, function () {
-    bluetooth.uartWriteNumber(9876)
-    serial.writeNumber(9876)
-})
 control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EVT_ANY, function () {
     if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_1_DOWN) {
         basic.showLeds(`
@@ -171,18 +159,5 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
     basic.pause(100)
     basic.clearScreen()
 })
-input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    bluetooth.uartWriteValue("abc", 234)
-    serial.writeValue("abc", 234)
-})
 let adat = ""
 basic.clearScreen()
-bluetooth.startUartService()
-basic.forever(function () {
-    adat = bluetooth.uartReadUntil(serial.delimiters(Delimiters.NewLine))
-    if (adat.isEmpty() == false) {
-        adat = "NL-" + adat + "-"
-        basic.showString(adat)
-        serial.writeString(adat)
-    }
-})
